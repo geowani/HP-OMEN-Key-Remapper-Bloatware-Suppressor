@@ -29,3 +29,15 @@ shell.Run "wt.exe", 1, False
 
 ' Example: Open Google Chrome
 shell.Run "chrome.exe", 1, False
+```
+
+Technical Background & Reverse Engineering
+
+Unlike standard key remapping software that listens to generic virtual key codes, the physical OMEN key sends low-level hardware signals handled directly by HP's proprietary system drivers. Prior to this project, limited documentation existed on how to cleanly intercept this trigger without relying on heavy background utilities.
+
+Through reverse engineering WMI (Windows Management Instrumentation) hardware events, the specific driver signal emitted by the HP keyboard driver (`hpqBEvnt`) was identified:
+
+* **EventID:** `29`
+* **EventData:** `8613`
+
+By targeting these exact parameters directly at the WMI event-sink level, this utility bypasses the default HP event loop, suppressing the launch of OMEN Gaming Hub and allowing instant command execution.
