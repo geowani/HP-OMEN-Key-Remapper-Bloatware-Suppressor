@@ -18,3 +18,14 @@ The application relies on Windows Management Instrumentation (WMI) to capture dr
 * **Hardware Interception:** Listens to `root\wmi` events filtered by `EventID = 29` and `EventData = 8613`.
 * **Action Execution:** Executes a silent loop triggering `explorer.exe` upon event registration.
 * **Zero Dependencies:** Uses standard Windows Script Host (`wscript.exe`), requiring no third-party runtimes or compilers.
+  
+Customization
+
+To assign a different application to the OMEN key, open `OmenKeyRemapper.vbs` and replace `explorer.exe` with your target executable path inside the loop:
+
+```vbscript
+' Example: Open Windows Terminal
+shell.Run "wt.exe", 1, False
+
+' Example: Open Google Chrome
+shell.Run "chrome.exe", 1, False
